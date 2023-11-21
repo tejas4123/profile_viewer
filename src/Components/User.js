@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const User = () => {
   const [userData, setUserData] = useState(null);
@@ -7,11 +7,11 @@ const User = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://randomuser.me/api/');
+        const response = await axios.get("https://randomuser.me/api/");
         const user = response.data.results[0];
         setUserData(user);
       } catch (error) {
-        console.error('Error fetching data:', error.message);
+        console.error("Error fetching data:", error.message);
       }
     };
 
@@ -21,15 +21,40 @@ const User = () => {
   return (
     <div>
       {userData ? (
-        <div>
-          <h2>User Information</h2>
-          <p>User Name: {`${userData.name.title} ${userData.name.first} ${userData.name.last}`}</p>
-          <p>User Email: {userData.email}</p>
-          <p>User Location: {`${userData.location.city}, ${userData.location.state}, ${userData.location.country}`}</p>
-          <img src={userData.picture.large} alt="User" />
+        <div className="w-[100%] min-h-screen text-black bg-[#E5E4E2] p-2">
+          <section className="max-w-[1170px] mx-auto min-h-screen ">
+            <h3 className="text-4xl justify-center items-center flex">
+              User Data
+            </h3>
+
+            <main className="w-25 h-25  items-center flex justify-center my-[30vh] ">
+              <div className="bg-red-500 flex gap-6 p-6 rounded-md items-center bg-white  shadow-2xl">
+                {/* image section  */}
+                <div>
+                  <img
+                    className="w-[100%] rounded border-2 shadow-3xl border-sky-500"
+                    src={userData.picture.large}
+                    alt="User"
+                  />
+                </div>
+                {/* text areA */}
+                <div className="my-3">
+                  {/* NAME AREA */}
+                  <div className="flex text-3xl gap-2 font-s4emibold">
+                    <h3 className="">{userData.name.first}</h3>
+                    <h3>{userData.name.last}</h3>
+                  </div>
+                  <h3 className="text-2xl">{userData.dob.age}</h3>
+                  <h3 className="text-xl"> {userData.email}</h3>
+                </div>
+              </div>
+            </main>
+          </section>
         </div>
       ) : (
-        <p>Loading...</p>
+        <p className="text-2xl font-bold items-center justify-content flex mx-auto p-4">
+          Loading...
+        </p>
       )}
     </div>
   );
