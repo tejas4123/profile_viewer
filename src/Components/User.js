@@ -7,7 +7,7 @@ const User = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://randomuser.me/api/");
+        const response = await axios.get("https://randomuser.me/api/?page=1&results=1&seed=abc");
         const user = response.data.results[0];
         setUserData(user);
       } catch (error) {
@@ -44,8 +44,8 @@ const User = () => {
                     <h3 className="">{userData.name.first}</h3>
                     <h3>{userData.name.last}</h3>
                   </div>
-                  <h3 className="text-2xl">{userData.dob.age}</h3>
-                  <h3 className="text-xl"> {userData.email}</h3>
+                  <h3 className="text-2xl">{userData.gender}</h3>
+                  <h3 className="text-xl"> {userData.phone}</h3>
                 </div>
               </div>
             </main>
